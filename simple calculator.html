@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+     <head> 
+        <title>calculator  and digital clock</title>
+     </head>
+     <style>
+      body{
+         display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #0072ff, #00c6ff);
+    font-family: 'Roboto', sans-serif;
+      }
+      .calculator{
+            border: 5px white;
+            background-color: palevioletred;
+            margin-top: 200px;
+            margin-bottom: 200px;
+            margin-left: 300px;
+            margin-right: 300px;
+            width: 350px;
+            height: 500px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+        .buttons{
+         display: grid;
+         grid-template-columns: repeat(4, 1fr);
+         gap: 15px;
+        }
+        input{
+         width: 320px;
+         font-size: 2.2rem;
+         padding: 15px;
+         border: none;
+         background-color: #f7f7f7;
+         text-align: right;
+         margin-bottom: 30px;
+         border-radius: 10px;
+         color: #333;
+         font-weight: bold;
+         box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:nth-child(-n+4) {
+    background-color: #90caf9;
+    color: #333;
+    font-weight: bold;
+    font-size: large;
+   }
+   button:nth-child(-n+4):hover {
+    background-color: #ffaa00; 
+   }
+   .equal {
+    background-color: #06d6a0; 
+    color: white;
+    font-weight: bold;
+    grid-column: span 2;
+    font-size: large; 
+}
+.equal:hover {
+    background-color: #04a67e; 
+}
+button:not(.clear):not(.equal):not(:nth-child(-n+4)) {
+    background-color: #bbdefb; 
+    color: #000;
+    font-size: large;
+}
+
+button:not(.clear):not(.equal):not(:nth-child(-n+4)):hover {
+    background-color: #90caf9;
+    font-weight: bold;
+    font-size: medium;
+}
+.clear {
+    background-color: #f55c47;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+}
+
+.clear:hover {
+    background-color: #d43d2f; 
+}
+
+     </style>
+     <body>
+        <div class="calculator">
+            <input type="text" id="result" disabled>
+            <div class="buttons">
+                 <button onclick="appendNumber('7')">7</button>
+                 <button onclick="appendNumber('8')">8</button>
+                 <button onclick="appendNumber('9')">9</button>
+                 <button onclick="appendNumber('4')">4</button>
+                 <button onclick="appendNumber('5')">5</button>
+                 <button onclick="appendNumber('6')">6</button>
+                 <button onclick="appendNumber('1')">1</button>
+                 <button onclick="appendNumber('2')">2</button>
+                 <button onclick="appendNumber('3')">3</button>
+                 <button onclick="appendNumber('0')">0</button>
+                 <button onclick="appendNumber('.')">.</button>
+                 <button onclick="appendOperator('+')">+</button>
+                 <button onclick="appendOperator('-')">-</button>
+                 <button onclick="appendOperator('*')">x</button>
+                 <button onclick="appendOperator('/')">÷</button>
+                 <button onclick="clearResult()" class="clear">C</button>
+                 <button onclick="calculateResult()" class="equal">=</button>
+               </div>
+        </div>
+        <script> 
+         let currentExpression = '';
+         function appendNumber(number) {
+            currentExpression += number;
+            document.getElementById('result').value = currentExpression;
+         }
+         function appendOperator(operator) {
+            currentExpression += ` ${operator} `;
+            document.getElementById('result').value = currentExpression;
+         }
+         function calculateResult() {
+            try {
+               currentExpression = eval(currentExpression.replace('÷', '/').replace('×', '*'));
+               document.getElementById('result').value = currentExpression;
+            } 
+            catch {
+               document.getElementById('result').value = 'Error';
+            }
+         }
+         function clearResult() {
+            currentExpression = '';
+            document.getElementById('result').value = '';
+         }
+        </script>
+     </body>
+     
+    <head>
+        <title>digital clock</title>
+    </head>
+    <style>
+        body{
+            font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #00c6ff, #0072ff); /* Blue Gradient */
+    color: white;
+        }
+        .clock-container{
+   background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    padding: 20px 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+.clock{
+   font-size: large;
+   color: #06d6a0;
+
+}
+.time {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.date {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #f0f0f0;
+}
+    </style>
+    <body>
+        <div class="clock-container">
+         <div class="clock">
+             <div id="time" class="time">00:00:00</div>
+             <div id="date" class="date">sunday, may 5, 2025</div>
+         </div>
+     </div>
+     <script>
+      function updateclock(){
+            const now = new Date();
+
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+
+            const days=['sunday','monday','tuesday','wedensday','thursday','friday','sunday'];
+            const months=['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+
+        const dayName = days[now.getDay()];
+        const day = now.getDate();
+        const month = months[now.getMonth()];
+        const year = now.getFullYear();
+        
+        document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+        document.getElementById('date').textContent = `${dayName}, ${month} ${day}, ${year}`;
+      }
+         setInterval(updateclock, 1000);
+     </script>
+     </body>
+</html>

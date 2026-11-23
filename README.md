@@ -6,7 +6,6 @@ This project predicts retail sales using machine learning and visualizes insight
 ## 🧠 Tools Used
 - Python (Pandas, Scikit-learn)
 - Tableau
-- ChatGPT
 
 ## 🔍 Features
 - Sales forecasting model
